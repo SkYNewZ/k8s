@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: test-daemon-set
+  namespace: default
+  labels:
+    name: test-daemon-set
+spec:
+  selector:
+    matchLabels:
+      name: test-daemon-set
+  template:
+    metadata:
+      labels:
+        name: test-daemon-set
+    spec:
+      containers:
+        - name: ubuntu
+          image: ubuntu:latest
+          command: ["/bin/bash", "-c", "--"]
+          args: ["while true; do sleep 30; done;"]
+      terminationGracePeriodSeconds: 30
